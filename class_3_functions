@@ -1,0 +1,110 @@
+#Understanding Functions
+def get_vpcs(arg):
+    ....
+
+#Find Even Number In A Number Range
+def find_even(a,b):
+    for num in range(a,b):
+        if num/2 == 0:
+            print(f'{num} is an EVEN number.')
+        else:
+            print(f'{num} is an ODD number.')
+
+#Following function dont return the value.
+def test(a):
+    print(a)
+
+#Following function willreturn the value and this function as be assigned as object.
+def test(a):
+    return a
+a = test(100)
+b = test(200)
+print(a,b)
+
+#Functions Password As Arguments
+def add(a,b):
+    return a+b
+
+def multiply(a,b):
+    return a*b
+
+def add_multiply(add,multiply,a,b):
+    x = add(a,b)
+    y = multiply(a,b)
+    print(x,y)
+
+#Calling nested functions
+def add(a,b):
+    return a+b
+
+def multiply(a,b):
+    return a*b
+
+def nested(a,b):
+    x = add(a,b)
+    y = multiply(a,b)
+    return x,y 
+
+x = aws(200,50)
+ec2_conn = boto3.client('ec2',region_name='us-east-1')
+(x)        (aws)            (200,50)
+class aws:
+    #Meathod
+    def __init__(self,a,b):
+        print(f'''
+        This Is A Class Default Function...!!.
+        The Variables Passed as {a} & {b}.''')
+        self.a = a
+        self.b = b
+
+    #Meathod
+    def adding(self):
+        return self.a+self.b
+
+    #Meathod
+    def multiply(self):
+        return self.a*self.b
+    
+    #Meathod
+    def sub(self):
+        return self.a-self.b
+
+#Establish boto3 client session to aws.
+import boto3
+ec2_conn = boto3.client('ec2',region_name='us-east-1')
+ec2_conn.describe_vpcs()
+json.dumps(ec2_conn.describe_vpcs())
+
+#Create a Python Function If The CIDR Block is used.
+def get_cidr_block(region):
+    ec2_conn = boto3.client('ec2',region_name=region)
+    for VPC in ec2_conn.describe_vpcs().get('Vpcs'):
+        print(VPC['CidrBlock'],'--->',VPC['VpcId'])
+
+#Check CIDR Block Is Used For VPC In A Given Region:
+def check_cidr_block(region,cidrblock):
+    all_cidr_blocks = []
+    ec2_conn = boto3.client('ec2',region_name=region)
+    for VPC in ec2_conn.describe_vpcs().get('Vpcs'):
+        all_cidr_blocks.append(VPC['CidrBlock'])
+        vpcid = VPC['VpcId']
+    if cidrblock in all_cidr_blocks:
+        print(f'The CIDR {cidrblock} Is Already In Use By A VPC {vpcid}')
+    else:
+        print(f'The CIDR {cidrblock} Is Availible For Use.')
+
+#Using For Loop With Functions
+for region in ["us-east-1","us-east-2","us-west-1","ap-south-1"]:
+    check_cidr_block(region,'10.40.0.0/16')
+          
+#Check CIDR Block Is Used For VPC In A Given Region Using List Comprehension:
+def list_com_check_cidr_block(region,cidrblock):
+    ec2_conn = boto3.client('ec2',region_name=region)
+    all_cidr_blocks = [  VPC['CidrBlock'] for VPC in ec2_conn.describe_vpcs().get('Vpcs') ]
+    if cidrblock in all_cidr_blocks:
+        print(f'The CIDR {cidrblock} Is Already In Use By A VPC.')
+    else:
+        print(f'The CIDR {cidrblock} Is Availible For Use.')
+        
+#Create a Python Function to check for Keypair in all regions.
+

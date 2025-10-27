@@ -1,0 +1,50 @@
+aws_cloud = {
+   'name': 'Amazon Web Services',
+   'estb': 2006,
+   'founder': 'Jeff Bezos',
+   'parent': 'Amazon',
+   'services': [
+      {'iaas': ["VPC","ELB","ASG"]},
+      {'paas': ["RDS","DyDB","EB"]},
+      {'saas': ["Chime","Mail","XYZ"]}
+      ]
+}
+
+aws_cloud.keys()
+aws_cloud.values()
+for k,v in aws_cloud.items():
+  print(k,v)
+
+client = boto3.client('ec2',region_name="us-east-1")
+import json
+vpcs = client.describe_vpcs().get('Vpcs')
+for vpc in vpcs:
+ print(vpc['VpcId'],'--->',vpc['CidrBlock'])
+json.dumps(client.describe_vpcs())
+
+###BOOLEAN###
+for item in [a,b,c,d,e]:
+  if item == None:
+      print(f'{item} is NONE')
+  else:
+      print(item)
+
+###Using Exception
+try:
+  items = [a,b,c,d,e]
+  for item in items:
+    if item == None:
+      print(f'{item} is NONE')
+    else:
+      print(item)
+except NameError:
+  print(f'Some Varieble is not declated as None or Value.')
+
+
+
+
+
+  
+
+
+
